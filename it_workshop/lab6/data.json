@@ -1,0 +1,8 @@
+{
+    "title": "Welcome to My Personal Website",
+    "introduction": "This is a brief introduction about me.",
+    "about_me": "Hi! I'm gaurav. I'm passionate about cloud computing. Here's a bit more about my background and what I do...",
+    "my_work": "I've worked on a range of projects. You can view some of my projects on github.",
+    "contact_info": "Want to get in touch? You can reach me at <a href=\"mailto:gaurav.choudhary@iiitg.ac.in\">gaurav.choudhary@iiitg.ac.in</a>.",
+    "footer": "Thank you for visiting my website!"
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Matrix Theme - Greetings</title>
+    
+    <style>
+        body {
+            background-color: black;
+            font-family: 'Courier New', monospace;
+            font-size: 60px;
+            text-align: center;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin: 0;
+            color: #00FF00;
+            text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00, 0 0 40px #00FF00;
+        }
+
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+            animation: glitch 2s infinite;
+            margin-top: -20px;
+        }
+
+        .glitch-text::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #0f0;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: noise 1s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch {
+            0%, 100% {
+                transform: translate(0);
+            }
+            20%, 40%, 60%, 80% {
+                transform: translate(-5px, 5px);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: translate(5px, -5px);
+            }
+        }
+
+        @keyframes noise {
+            0%, 100% {
+                clip: rect(63px, 9999px, 71px, 0);
+            }
+            4% {
+                clip: rect(56px, 9999px, 8px, 0);
+            }
+            /* ... Add your preferred glitch noise frames here ... */
+        }
+
+        .linkedin-id {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #00FF00;
+            text-decoration: none;
+            font-size: 20px;
+        }
+        .linkedin-container {
+            display: flex;
+            justify-content: center;
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+        }
+
+        .linkedin-link {
+            margin: 0 60px; /* Increase the margin to 60px for larger distance */
+            color: #00FF00;
+            text-decoration: none;
+            font-size: 22px;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+    
+    <!-- Static date at the top -->
+    <div style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); font-size: 24px; color: #00FF00;">
+        1  |  09  |  2023
+    </div>
+
+    <!-- Greeting text with glitch effect -->
+    <div class="glitch-text" data-text="FEYNMAN_UNORIGNALS">FEYNMAN_UNORIGNALS</div>
+
+    <script>
+        // Array of greetings to display
+        const greetings = ["FEYNMAN_UNORIGNALS", "जल्द ही!"];
+
+        // Function to change the greeting text
+        function changeGreeting() {
+            const glitchText = document.querySelector(".glitch-text");
+            let currentIndex = 0;
+
+            function updateGreeting() {
+                glitchText.textContent = greetings[currentIndex];
+                currentIndex = (currentIndex + 1) % greetings.length;
+            }
+
+            // Initial greeting update
+            updateGreeting();
+
+            // Set interval to change greeting every 1 seconds
+            setInterval(updateGreeting, 1000);
+        }
+
+        // Call the function to initiate the greeting change
+        changeGreeting();
+    </script>
+
+    <!-- LinkedIn links for Gaurav and Om -->
+    <div class="linkedin-container">
+        <a class="linkedin-link" href="https://www.linkedin.com/in/gauraviiitg" target="_blank" style="margin: 0 30px;">GAURAV CHOUDHARY</a>
+        <a class="linkedin-link" href="https://www.linkedin.com/in/om-sharma-425774228" target="_blank" style="margin: 0 80px;">OM SHARMA</a>
+    </div>
+</body>
+
+</html>

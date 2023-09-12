@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Glitch Text and Falling Binary Numbers</title>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            font-family: 'Courier New', monospace;
+            color: #00FF00;
+            text-shadow: 0 0 10px #00FF00, 0 0 20px #00FF00, 0 0 40px #00FF00;
+        }
+
+        canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .glitch-text-container {
+            position: relative;
+            font-size: 60px;
+            background-color: black;
+            padding: 20px;
+            z-index: 2;
+        }
+
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+            animation: glitch 2s infinite;
+            margin-top: -20px;
+        }
+
+        .glitch-text::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: #0f0;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: noise 1s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch {
+            0%, 100% {
+                transform: translate(0);
+            }
+            20%, 40%, 60%, 80% {
+                transform: translate(-5px, 5px);
+            }
+            10%, 30%, 50%, 70%, 90% {
+                transform: translate(5px, -5px);
+            }
+        }
+
+        @keyframes noise {
+    0%, 100% {
+        clip: rect(63px, 9999px, 71px, 0);
+    }
+    4% {
+        clip: rect(56px, 9999px, 8px, 0);
+    }
+    8% {
+        clip: rect(20px, 9999px, 56px, 0);
+    }
+    12% {
+        clip: rect(4px, 9999px, 56px, 0);
+    }
+    16% {
+        clip: rect(48px, 9999px, 4px, 0);
+    }
+    20% {
+        clip: rect(56px, 9999px, 8px, 0);
+    }
+    24% {
+        clip: rect(40px, 9999px, 56px, 0);
+    }
+    28% {
+        clip: rect(16px, 9999px, 48px, 0);
+    }
+    32% {
+        clip: rect(56px, 9999px, 8px, 0);
+    }
+    /* Add more glitch noise frames as needed */
+}
+
+
+        .static-text-container {
+            background-color: black;
+            padding: 10px 20px;
+            z-index: 2;
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .static-text {
+            font-size: 24px;
+            color: #00FF00;
+        }
+
+        .linkedin-link-container {
+            display: flex;
+            position: absolute;
+            bottom: 20px;
+            z-index: 2;
+            background-color: black;
+            padding: 10px 20px;
+        }
+
+        .linkedin-link {
+            color: #00FF00;
+            text-decoration: none;
+            font-size: 22px;
+            margin: 0 20px;
+        }
+
+        /* Change the margin to move the links to the right */
+        .linkedin-link.right {
+            margin-left: 50px;
+            margin-right: 30;
+        }
+    </style>
+</head>
+<body>
+    <!-- Static Text at the Top -->
+    <div class="static-text-container">
+        <div class="static-text">Est'd 2022</div>
+    </div>
+
+    <!-- Glitch Text -->
+    <div class="glitch-text-container">
+        <div class="glitch-text" data-text="FEYNMAN_UNORIGINALS">FEYNMAN_UNORIGINALS</div>
+    </div>
+
+    <!-- LinkedIn Links -->
+    <div class="linkedin-link-container">
+        <a class="linkedin-link" href="https://www.linkedin.com/in/gauraviiitg" target="_blank">GAURAV CHOUDHARY</a>
+
+    </div>
+
+    <!-- Falling Binary Numbers -->
+    <canvas id="binaryCanvas"></canvas>
+
+    <script>
+        // Glitch Text Animation
+        const glitchText = document.querySelector(".glitch-text");
+        const greetings = ["FEYNMAN_UNORIGINALS", "जल्द ही!"];
+        let currentIndex = 0;
+
+        function updateGreeting() {
+            glitchText.textContent = greetings[currentIndex];
+            currentIndex = (currentIndex + 1) % greetings.length;
+        }
+
+        setInterval(updateGreeting, 1000);
+
+        // Binary Numbers Animation
+        var binaryCanvas = document.getElementById('binaryCanvas');
+        var ctx = binaryCanvas.getContext('2d');
+
+        binaryCanvas.width = window.innerWidth;
+        binaryCanvas.height = window.innerHeight;
+
+        var binaryDigits = '01';
+        binaryDigits = binaryDigits.split('');
+
+        var fontSize = 20,
+            columns = binaryCanvas.width / fontSize;
+
+        var drops = [];
+        for (var i = 0; i < columns; i++) {
+            drops[i] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, .1)';
+            ctx.fillRect(0, 0, binaryCanvas.width, binaryCanvas.height);
+
+            for (var i = 0; i < drops.length; i++) {
+                var digit = binaryDigits[Math.floor(Math.random() * binaryDigits.length)];
+                ctx.fillStyle = '#0f0';
+                ctx.fillText(digit, i * fontSize, drops[i] * fontSize);
+                drops[i]++;
+                if (drops[i] * fontSize > binaryCanvas.height && Math.random() > .95) {
+                    drops[i] = 0;
+                }
+            }
+        }
+
+        setInterval(draw, 33);
+    </script>
+</body>
+</html>
