@@ -1,0 +1,62 @@
+Lab 7 : 
+
+1. Note down the different link layer protocols you observe with respect to
+the different types of networks. [1 Mark]    Ethernet (IEEE 802.3), Wi-Fi (IEEE 802.11)
+
+
+2. Find out the address (both IP and physical) for each participating node in
+the network. [2 Marks]           node 1: 11.1.1.2, AF1....               node 2 : 11.3.1.2, AF1....
+
+3. Start an application on X sending data to Y. [2 Marks]
+a. Note down the ratio of packets received to the packets transmitted               1042/1046      1075/1084
+
+b. Note down the ratio of packets that are received in error to the
+packets transmitted                                                                                          1/1046               2/1084    
+
+c. Note down the ratio of packets that have collided to the packets
+transmitted                                                                                                      1/1046                  2/1084 
+
+d. Note down the total number of packets lost                                                   4                          9
+
+e. Note down the throughput in Mbps.                                                               .608528                .627800
+
+f. Observe the MAC tables in the L2 switches and note down the entries
+Repeat step 3 by starting an application on Y sending data to X.
+
+4. Repeat the above experiment for flow XY with R1-R2 bandwidth
+increased to 1 Gbps. [2 Marks]
+
+a. Note down the ratio of packets received to the packets transmitted               998/1004      1035/1043
+
+b. Note down the ratio of packets that are received in error to the
+packets transmitted                                                                                          0/1004             3/1043 
+
+c. Note down the ratio of packets that have collided to the packets
+transmitted                                                                                                      2/1004                  1/1043
+
+d. Note down the total number of packets lost                                                   8                        8
+
+e. Note down the throughput in Mbps.                                                               .582832                .604440
+
+
+5. Repeat the above experiment for flow XY with Constant Bit Rate type
+application and packet size and inter-arrival time set to constant. [2
+Marks]
+
+a. Note down the ratio of packets received to the packets transmitted               1000/1004      1000/1008
+
+b. Note down the ratio of packets that are received in error to the
+packets transmitted                                                                                          0/1004             2/1008
+
+c. Note down the ratio of packets that have collided with the packets
+transmitted                                                                                                      1/1004                  2/1008
+
+d. Note down the total number of packets lost                                                   4                         8
+
+e. Note down the throughput in Mbps.                                                               .60444                .584000
+
+6. Find out the data link layer payload size and header size for           ethernet     header size: 133.396-byte  //all                       ethernet     header size: 189.446-byte   //all   
+application data packets. [1 Mark]                                                                        payload size: 1458.545                                                payload size: 1458.545
+
+
+

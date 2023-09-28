@@ -1,39 +1,32 @@
-from flask import Flask, request, jsonify
-import mysql.connector
+import boto3
 
-app = Flask(__name__)
+def create_rds_instance(instance_name, db_username, db_password, security_group_id):
+    client = boto3.client('rds', region_name='ap-south-1')
 
-# Database connection configuration
-db_config = {
-    "host": "mydbinstance.c2na0up97cuj.ap-south-1.rds.amazonaws.com",
-    "user": "gaurav",
-    "password": "monugaurav",
-    "database": "mydatabase",
-}
+    response = client.create_db_instance(
+        DBName='FeedbackDB',
+        DBInstanceIdentifier=instance_name,
+        AllocatedStorage=20,
+        DBInstanceClass='db.t2.micro',
+        Engine='mysql',
+        MasterUsername=db_username,
+        MasterUserPassword=db_password,
+        VpcSecurityGroupIds=[
+            security_group_id,
+        ],
+        PubliclyAccessible=True,
+    )
 
-@app.route("/api/submit-feedback", methods=["POST"])
-def submit_feedback():
-    try:
-        # Get feedback from the form submission
-        feedback = request.form.get("feedback")
+    print(f"RDS instance {instance_name} is being created. This might take some time.")
+    waiter = client.get_waiter('db_instance_available')
+    waiter.wait(DBInstanceIdentifier=instance_name)
+    print(f"RDS instance {instance_name} has been created!")
 
-        # Connect to the database
-        conn = mysql.connector.connect(**db_config)
-        cursor = conn.cursor()
+# Replace these placeholders with actual values before running the script
+INSTANCE_NAME = "lab5"
+DB_USERNAME = "admin"
+DB_PASSWORD = "$inghadi3"
+SECURITY_GROUP_ID = "sg-003c7862d8429fa1f"
 
-        # Insert feedback into the database
-        insert_query = "INSERT INTO feedback (message) VALUES (%s)"
-        cursor.execute(insert_query, (feedback,))
-        conn.commit()
+create_rds_instance(INSTANCE_NAME, DB_USERNAME, DB_PASSWORD, SECURITY_GROUP_ID)
 
-        # Close database connection
-        cursor.close()
-        conn.close()
-
-        return jsonify({"message": "Feedback submitted successfully!"}), 201
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-if __name__ == "__main__":
-    app.run()

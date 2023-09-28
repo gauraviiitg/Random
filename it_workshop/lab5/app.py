@@ -1,47 +1,36 @@
-from flask import Flask, request, render_template
-import mysql.connector
+from flask import Flask, request, jsonify
+import pymysql
 
 app = Flask(__name__)
 
-# RDS database parameters
-db_host = 'mydbinstance.c2na0up97cuj.ap-south-1.rds.amazonaws.com'  # Replace with your RDS endpoint
-db_user = 'gaurav'
-db_password = 'monugaurav'
-db_name = 'mydatabase'
-
-@app.route('/')
-def index():
-    return render_template('index.html')
+# Configure database
+db_host = "lab5.c2na0up97cuj.ap-south-1.rds.amazonaws.com"
+db_user = "admin"
+db_password = "password"
+db_name = "FeedbackDB"
 
 @app.route('/submit-feedback', methods=['POST'])
 def submit_feedback():
-    feedback = request.form['feedback']
+    name = request.form.get('name')
+    feedback = request.form.get('feedback')
+
+    # Create a database connection
+    connection = pymysql.connect(host=db_host,
+                                 user=db_user,
+                                 password=db_password,
+                                 database=db_name)
 
     try:
-        # Create a connection to the RDS database
-        connection = mysql.connector.connect(
-            host=db_host,
-            user=db_user,
-            password=db_password,
-            database=db_name
-        )
-
-        if connection.is_connected():
-            cursor = connection.cursor()
-            # Insert the feedback into the database
-            cursor.execute("INSERT INTO comments (comment) VALUES (%s)", (feedback,))
+        with connection.cursor() as cursor:
+            sql = "INSERT INTO feedback (name, feedback) VALUES (%s, %s)"
+            cursor.execute(sql, (name, feedback))
             connection.commit()
-            cursor.close()
-            return "Feedback submitted successfully!"
-    
-    except mysql.connector.Error as e:
-        print("Error:", e)
-        return "An error occurred while submitting feedback."
 
+        return jsonify({"message": "Feedback submitted successfully!"}), 200
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
     finally:
-        if connection.is_connected():
-            connection.close()
-            print("Connection closed")
+        connection.close()
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5000)
