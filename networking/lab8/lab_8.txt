@@ -1,0 +1,118 @@
+1. Experiment 1 [5 marks]
+In this assignment you will perform an experiment to understand the working
+of the Spanning Tree Protocol. The Spanning-Tree Protocol (STP) prevents
+loops from being formed when switches or bridges are interconnected via
+multiple paths. Switches exchange messages to detect loops, and then
+removes the loop by blocking selected bridge interfaces. It guarantees that
+there is one and only one active path between two network devices.
+Consider the given network topology with five L2 switches. Edit the switch
+priorities as per the given figure. For an example, B1 will get priority 1 and B2
+will get priority 2 and so on.
+
+H1 --- B1 ------------ B4 --- H3
+        |\             | 
+        | B3---------- B5 ----H4    
+        |/
+H2 --- B2
+
+
+
+Create a custom application for source H2 to destination H4 with packet size
+1000 bytes and inter-arrival time to 800 microsec. The start time parameter is
+set to 1 sec while configuring the application. Run the simulation for 10 sec.
+
+Designated Ports:
+
+B2's port connecting to B1
+B1's port connecting to B4
+B4's port connecting to B5
+
+Blocked Ports:
+
+B3's port connecting to B1
+B3's port connecting to B2
+B3's port connecting to B5
+
+spanning tree. 
+
+H2 --- B2 --- B1 --- B4 --- B5 --- H4
+
+the MAC address table for each switch
+
+L2_SWITCH_1		
+		
+Mac Address	Type	OutPort
+AF1D00000601	Dynamic	1
+AF1D00000401	Dynamic	2
+AF1D00000302	Dynamic	3
+AF1D00000201	Dynamic	4
+AF1D00000701	Dynamic	4
+AF1D00000901	Dynamic	2
+		
+
+L2_SWITCH_2		
+		
+Mac Address	Type	OutPort
+AF1D00000104	Dynamic	1
+AF1D00000303	Dynamic	2
+AF1D00000701	Dynamic	3
+AF1D00000901	Dynamic	1
+		
+		
+L2_SWITCH_3		
+		
+Mac Address	Type	OutPort
+AF1D00000503	Dynamic	1
+AF1D00000103	Dynamic	2
+AF1D00000202	Dynamic	3
+AF1D00000701	Dynamic	2
+		
+		
+		
+		
+L2_SWITCH_4		
+		
+Mac Address	Type	OutPort
+AF1D00000102	Dynamic	1
+AF1D00000801	Dynamic	2
+AF1D00000501	Dynamic	3
+AF1D00000701	Dynamic	1
+AF1D00000901	Dynamic	3
+		
+		
+		
+		
+L2_SWITCH_5		
+		
+Mac Address	Type	OutPort
+AF1D00000403	Dynamic	1
+AF1D00000901	Dynamic	2
+AF1D00000301	Dynamic	3
+AF1D00000701	Dynamic	1
+
+
+2. Experiment 2 [5 Marks]
+
+Design a network scenario using a Layer-2 Switch where devices (Wired Nodes
+in NetSim) D1, D2 belong to VLAN1 and D3, D4 belong to VLAN2.
+a. Create a broadcast application with D1 as the source. Document the frames
+received on both the VLANs. [1 Mark]
+
+VLAN 1 : 4987
+VLAN 2 : 0 
+
+b. Create a unicast application with D2 as the sender and D1 as the receiver.
+Determine the throughput, and the number of packets received in error. [2
+Marks]
+
+throughput : .584
+number of packets received in error : 6
+
+c. Create a unicast application with D2 as the sender and D3 as the receiver.
+Determine the throughput of the network. Document your
+findings/observations. [2 Marks]
+
+throughput : 0.00
+number of packets transmitted : 5000
+number of packets received : 0
+Direct communication between devices on separate VLANs is not allowed without routing

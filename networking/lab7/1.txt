@@ -20,7 +20,19 @@ d. Note down the total number of packets lost                                   
 
 e. Note down the throughput in Mbps.                                                               .608528                .627800
 
-f. Observe the MAC tables in the L2 switches and note down the entries
+f. Observe the MAC tables in the L2 switches and note down the entries 
+
+mac address 	AF1D00000301    AF1D00000302
+Buffer size     1 mb
+stp status      true
+switch priority 1
+Switch id       1AF1D00000301 
+spanning tree   IEEE 802.1D
+STP cost        90
+switching mode  store forward
+VLAN status     false
+
+     
 Repeat step 3 by starting an application on Y sending data to X.
 
 4. Repeat the above experiment for flow XY with R1-R2 bandwidth
@@ -38,6 +50,16 @@ d. Note down the total number of packets lost                                   
 
 e. Note down the throughput in Mbps.                                                               .582832                .604440
 
+mac address 	AF1D00000301    AF1D00000302
+Buffer size     1 mb
+stp status      true
+switch priority 1
+Switch id       1AF1D00000301 
+spanning tree   IEEE 802.1D
+STP cost        90
+switching mode  store forward
+VLAN status     false
+
 
 5. Repeat the above experiment for flow XY with Constant Bit Rate type
 application and packet size and inter-arrival time set to constant. [2
@@ -54,6 +76,17 @@ transmitted                                                                     
 d. Note down the total number of packets lost                                                   4                         8
 
 e. Note down the throughput in Mbps.                                                               .60444                .584000
+
+mac address 	AF1D00000301    AF1D00000302
+Buffer size     1 mb
+stp status      true
+switch priority 1
+Switch id       1AF1D00000301 
+spanning tree   IEEE 802.1D
+STP cost        90
+switching mode  store forward
+VLAN status     false
+
 
 6. Find out the data link layer payload size and header size for           ethernet     header size: 133.396-byte  //all                       ethernet     header size: 189.446-byte   //all   
 application data packets. [1 Mark]                                                                        payload size: 1458.545                                                payload size: 1458.545
