@@ -33,7 +33,7 @@ if __name__ == '__main__':
         ip, mask_length = net.split('/')
         routing_table.append((ip_to_bin(ip), int(mask_length), hop))
 
-    test_ips = ["C4.5E.13.87", "C4.6B.31.2E","40.1.1.1"]
+    test_ips = ["7F.6C.20.11", "FF.5E.44.12","40.1.1.1"]
     for ip in test_ips:
         next_hop = get_next_hop(ip_to_bin(ip), routing_table)
         print(f"Next hop for {ip} is {next_hop}")
